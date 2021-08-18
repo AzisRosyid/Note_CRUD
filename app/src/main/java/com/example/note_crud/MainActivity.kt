@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                             if(response.isSuccessful){
                                 Toast.makeText(applicationContext, response.body()!!.message, Toast.LENGTH_SHORT).show()
                                 onStart()
-                                binding.progressBar.visibility = View.GONE
+                                //binding.progressBar.visibility = View.GONE
                             }
                         }
 
