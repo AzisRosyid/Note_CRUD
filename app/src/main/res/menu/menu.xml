@@ -10,6 +10,6 @@
         app:actionViewClass="android.widget.SearchView"
         />
 
-\
+
 
 </menu>
