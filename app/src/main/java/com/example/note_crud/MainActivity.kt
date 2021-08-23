@@ -13,7 +13,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.note_crud.databinding.ActivityMainBinding
 import android.app.SearchManager;
+import android.widget.AdapterView
 import android.widget.SearchView.OnQueryTextListener;
+import androidx.core.view.MenuItemCompat
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -141,10 +143,11 @@ class MainActivity : AppCompatActivity() {
                 override fun onQueryTextChange(newText: String?): Boolean {
                     return true
                 }
-
             })
         }
         return super.onCreateOptionsMenu(menu)
     }
+
+
 
 }
