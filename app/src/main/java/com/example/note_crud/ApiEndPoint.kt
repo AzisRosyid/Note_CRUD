@@ -5,19 +5,21 @@ import retrofit2.http.*
 
 interface ApiEndPoint {
 
-    @GET("data.php")
+    @GET("notes")
     fun data() : Call<MainModel>
 
     @FormUrlEncoded
-    @POST("create.php")
+    @POST("notes")
     fun create(@Field("note") note: String) : Call<SubmitModel>
 
     @FormUrlEncoded
-    @PUT("update.php")
-    fun update(@Field("id") id: String, @Field("note") note: String) : Call<SubmitModel>
+    @PUT("notes/{id}")
+    fun update(@Path("id") id: String, @Field("note") note: String) : Call<SubmitModel>
 
+    @DELETE("notes/{id}")
+    fun delete(@Path("id") id: String): Call<SubmitModel>
 
-    @DELETE("delete.php/")
-    fun delete(@Body("id") id: String): Call<SubmitModel>
+    @GET("notes/search/{search}")
+    fun search(@Path("search") search: String): Call<MainModel>
 
 }

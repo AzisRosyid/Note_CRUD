@@ -17,7 +17,7 @@ class ApiRetrofit {
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.7.126/tutorial/crud/")
+            .baseUrl("http://192.168.7.126/note_laravel/public/api/")
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

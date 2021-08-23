@@ -5,13 +5,15 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.note_crud.databinding.ActivityMainBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
+import android.app.SearchManager;
+import android.widget.SearchView.OnQueryTextListener;
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -114,5 +116,35 @@ class MainActivity : AppCompatActivity() {
 
          })
      }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        val menuItem = menu!!.findItem(R.id.search)
+        if(menuItem!=null){
+            val searchView = menuItem.actionView as SearchView
+            searchView.setOnQueryTextListener(object: OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    api.search(query.toString()).enqueue(object : Callback<MainModel>{
+                        override fun onResponse(
+                            call: Call<MainModel>,
+                            response: Response<MainModel>
+                        ) {
+                            noteAdapter.setData(response.body()!!.notes)
+                        }
+
+                        override fun onFailure(call: Call<MainModel>, t: Throwable) {
+                            Log.e("OnFailure", t.toString())
+                        }
+                    })
+                    return false
+                }
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return true
+                }
+
+            })
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
 
 }
